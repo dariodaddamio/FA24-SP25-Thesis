@@ -1,4 +1,3 @@
-
 alert(playRPS());
 function playRPS() {
     input = confirm("Let's play rock, paper, scissors!");
@@ -9,7 +8,7 @@ function playRPS() {
     if (input === null) { // hitting enter without typing anything
         return "Maybe next time!";
     }
-    input = input.trim();
+    input = input.trim().toLowerCase();
     var choices = ["rock", "paper", "scissors"];
     var computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
@@ -45,7 +44,7 @@ function playRPS() {
     }
     alert("You chose " + input + " and the computer chose " + computerChoice + ".");
     input = prompt("Would you like to play again? (y/n)");
-    switch (input.trim()) {
+    switch (input.trim().toLowerCase()) {
         case "y":
             return playRPS();
             break;
