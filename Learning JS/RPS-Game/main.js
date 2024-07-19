@@ -4,13 +4,23 @@ function playRPS() {
     if (input === false) { // false being cancel
         return "Maybe next time!";
     }
+
     input = prompt("Choose rock, paper, or scissors.");
-    if (input === null) { // hitting enter without typing anything
-        return "Maybe next time!";
-    }
-    input = input.trim().toLowerCase();
     var choices = ["rock", "paper", "scissors"];
-    var computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    
+    while(!choices.includes(input)) { // while input is not in choices
+        if(input === null) { // false being cancel // ensures after making a typo, you can cancel afterward
+            return "Maybe next time!";
+        }
+        else {
+            alert("Please enter a valid choice."); // if input is not null (and not withing choices), then it's invalid
+            input = prompt("Choose rock, paper, or scissors."); // ask again
+        }
+    }
+
+    input = input.trim().toLowerCase(); // remove whitespace and make lowercase for display purposes
+    
+    var computerChoice = choices[Math.floor(Math.random() * choices.length)]; // random choice for computer from choices
 
     if (input === computerChoice) {
         alert("It's a tie!");
@@ -37,21 +47,15 @@ function playRPS() {
         }
         else {
             alert("You lose!");
-        }
+        }  
     }
-    else {
-        console.log("Invalid input. Please try again.");
-    }
+
     alert("You chose " + input + " and the computer chose " + computerChoice + ".");
-    input = prompt("Would you like to play again? (y/n)");
-    switch (input.trim().toLowerCase()) {
-        case "y":
-            return playRPS();
-            break;
-        case "n": 
-            return "Thanks for playing!";
-            break;
-        default: // hitting enter without typing anything
-            return "Invalid input. Please try again.";
+    input = confirm("Would you like to play again?");
+    if (input === false) { // false being cancel
+        return "Maybe next time!";
+    }
+    if (input === true) { // true being ok
+        return playRPS();
     }
 }
